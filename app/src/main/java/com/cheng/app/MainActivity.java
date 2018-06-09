@@ -1,17 +1,22 @@
 package com.cheng.app;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cheng.app.refresh.PullToRefreshBase;
 import com.cheng.app.refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,53 +49,97 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 isLoadMore = false;
-                RequestRefresh("userid","",REQUEST_NUM);
+                marktime = "";
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
+                    }
+                },3000);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 isLoadMore = true;
-                RequestMoreData("userid","",REQUEST_NUM);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        RequestMoreData("onPullUpToRefresh userid", marktime, REQUEST_NUM);
+                    }
+                },3000);
+
             }
         });
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
+            }
+        },3000);
     }
 
-    //下拉刷新数据
-    void RequestRefresh(String params,String marktime,int length){
+    Handler handler = new Handler(){};
 
+    //下拉刷新数据
+    void RequestRefresh(String params, String marktime, int length) {
+        NewsResponse response = requestData(params,marktime);
+        onResponse(response);
     }
 
     //上拉加载更多数据
-    void RequestMoreData(String params,String marktime,int length){
+    void RequestMoreData(String params, String marktime, int length) {
+        NewsResponse response = requestData(params,marktime);
+        onResponse(response);
+    }
 
+    NewsResponse requestData(String params ,String marktime){
+        NewsResponse response = new NewsResponse();
+        response.marktime = "" + new Random().nextLong();
+        ArrayList<News> list = new ArrayList<>();
+        if(TextUtils.isEmpty(marktime)){
+            for (int i = 0; i < 10; i++) {
+                News news = new News();
+                news.icon = params;
+                news.title = "title："+ i;
+                news.content = "content："+i;
+                list.add(news);
+            }
+        }else{
+            for (int i = 10; i < 19; i++) {
+                News news = new News();
+                news.icon = params;
+                news.title = "title："+ i;
+                news.content = "content："+i;
+                list.add(news);
+            }
+        }
+        response.newsList = list;
+        return response;
     }
 
     //模拟http请求放回的方法
-    public void onResponse(Object object){
-        if(object instanceof NewsResponse){
+    public void onResponse(Object object) {
+        if (object instanceof NewsResponse) {
             NewsResponse mResponse = (NewsResponse) object;
             marktime = mResponse.marktime;//获取标记时间，标记时间为空则刷新数据，不为空则加载更多
             if (!isLoadMore) {
                 mDataList.clear();
-
-                ArrayList<News> list = mResponse.newsList;
-                if (list != null) {
-                    for (int i = 0; i < list.size(); i++) {
-                        mDataList.add(list.get(i));
-                    }
-                }
-                if(mDataList.size() == REQUEST_NUM)
-                {
-                    hasMoreData = true;
-                }else{
-                    hasMoreData = false;
-                }
-
-                adapter.updataList(mDataList);
-                pullToRefreshListView.onPullDownRefreshComplete();
-                pullToRefreshListView.onPullUpRefreshComplete();
-                pullToRefreshListView.setHasMoreData(hasMoreData);
             }
+            ArrayList<News> list = mResponse.newsList;
+            if (list != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    mDataList.add(list.get(i));
+                }
+            }
+            if (mDataList.size() == REQUEST_NUM) {
+                hasMoreData = true;
+            } else {
+                hasMoreData = false;
+            }
+            adapter.updataList(mDataList);
+            pullToRefreshListView.onPullDownRefreshComplete();
+            pullToRefreshListView.onPullUpRefreshComplete();
+            pullToRefreshListView.setHasMoreData(hasMoreData);
         }
     }
 
@@ -98,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
     class MyAdapter extends BaseAdapter {
         List<News> newsList = new ArrayList<>();
 
-        void updataList(List<News> list){
+        void updataList(List<News> list) {
             newsList = list;
             notifyDataSetChanged();
         }
@@ -119,9 +168,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View view, ViewGroup parent) {
+            ViewHolder holder = null;
+            if(view == null){
+                holder = new ViewHolder();
+                view = LayoutInflater.from(MainActivity.this).inflate(
+                        R.layout.item_news, parent, false);
+                holder.titleTv = view.findViewById(R.id.title_tv);
+                holder.contentTv = view.findViewById(R.id.content_tv);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+            if(!newsList.isEmpty()){
+                News bean = newsList.get(i);
+                holder.titleTv.setText(bean.title);
+                holder.contentTv.setText(bean.content);
+            }
             return view;
         }
+    }
+
+    public class ViewHolder {
+        TextView titleTv, contentTv;
     }
 
     class News {

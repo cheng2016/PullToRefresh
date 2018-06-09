@@ -1,9 +1,11 @@
 package com.cheng.app.refresh;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ import com.cheng.app.R;
  */
 public class FooterLoadingLayout extends LoadingLayout {
 	/** 进度条 */
-	private ProgressBar mProgressBar;
+	private ImageView mProgressBar;
 	/** 显示的文本 */
 	private TextView mHintView;
 	private LinearLayout mFooterContainer;
@@ -53,7 +55,7 @@ public class FooterLoadingLayout extends LoadingLayout {
 	 *            context
 	 */
 	private void init(Context context) {
-		mProgressBar = (ProgressBar) findViewById(R.id.pull_to_load_footer_progressbar);
+		mProgressBar = (ImageView) findViewById(R.id.pull_to_load_footer_progressbar);
 		mHintView = (TextView) findViewById(R.id.pull_to_load_footer_hint_textview);
 		mFooterContainer=(LinearLayout)findViewById(R.id.pull_to_load_footer_content);
 		setState(State.RESET);
@@ -82,8 +84,11 @@ public class FooterLoadingLayout extends LoadingLayout {
 	@Override
 	protected void onStateChanged(State curState, State oldState) {
 		mProgressBar.setVisibility(View.GONE);
-		mHintView.setVisibility(View.INVISIBLE);
-
+		//imageView指的是需要播放动画的ImageView控件
+		AnimationDrawable animationDrawable = (AnimationDrawable) mProgressBar.getBackground();
+		//启动动画
+		animationDrawable.stop();
+		mHintView.setVisibility(View.GONE);
 		super.onStateChanged(curState, oldState);
 	}
 
@@ -106,8 +111,12 @@ public class FooterLoadingLayout extends LoadingLayout {
 
 	@Override
 	protected void onRefreshing() {
-		mHintView.setVisibility(View.VISIBLE);
 		mProgressBar.setVisibility(View.VISIBLE);
+		//imageView指的是需要播放动画的ImageView控件
+		AnimationDrawable animationDrawable = (AnimationDrawable) mProgressBar.getBackground();
+		//启动动画
+		animationDrawable.start();
+		mHintView.setVisibility(View.VISIBLE);
 		mHintView.setText(R.string.pushmsg_center_load_more_ongoing_text);
 	}
 

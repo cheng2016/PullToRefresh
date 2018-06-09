@@ -2,6 +2,8 @@ package com.cheng.app.refresh;
 
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -29,7 +31,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
     /**箭头图片*/
     private ImageView mArrowImageView;
     /**进度条*/
-    private ProgressBar mProgressBar;
+    private ImageView mProgressBar;
     /**状态提示TextView*/
     private TextView mHintTextView;
     /**最后更新时间的TextView*/
@@ -71,7 +73,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
         mHeaderContainer = (RelativeLayout) findViewById(R.id.pull_to_refresh_header_content);
         mArrowImageView = (ImageView) findViewById(R.id.pull_to_refresh_header_arrow);
         mHintTextView = (TextView) findViewById(R.id.pull_to_refresh_header_hint_textview);
-        mProgressBar = (ProgressBar) findViewById(R.id.pull_to_refresh_header_progressbar);
+        mProgressBar = (ImageView) findViewById(R.id.pull_to_refresh_header_progressbar);
         mHeaderTimeView = (TextView) findViewById(R.id.pull_to_refresh_header_time);
         mHeaderTimeViewTitle = (TextView) findViewById(R.id.pull_to_refresh_last_update_time_text);
         
@@ -112,40 +114,40 @@ public class HeaderLoadingLayout extends LoadingLayout {
     
     @Override
     protected void onStateChanged(State curState, State oldState) {
-        mArrowImageView.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.GONE);
-        
+        mArrowImageView.setVisibility(View.INVISIBLE);
+        mProgressBar.setVisibility(View.INVISIBLE);
+        ((Animatable)mProgressBar.getDrawable()).stop();
         super.onStateChanged(curState, oldState);
     }
 
     @Override
     protected void onReset() {
-//        mArrowImageView.clearAnimation();
+        mArrowImageView.clearAnimation();
         mHintTextView.setText(R.string.pull_to_refresh_header_hint_normal);
     }
 
     @Override
     protected void onPullToRefresh() {
         if (State.RELEASE_TO_REFRESH == getPreState()) {
-//            mArrowImageView.clearAnimation();
-//            mArrowImageView.startAnimation(mRotateDownAnim);
+            mArrowImageView.clearAnimation();
+            mArrowImageView.startAnimation(mRotateDownAnim);
         }
-        
         mHintTextView.setText(R.string.pull_to_refresh_header_hint_normal);
     }
 
     @Override
     protected void onReleaseToRefresh() {
-//        mArrowImageView.clearAnimation();
-//        mArrowImageView.startAnimation(mRotateUpAnim);
+        mArrowImageView.clearAnimation();
+        mArrowImageView.startAnimation(mRotateUpAnim);
         mHintTextView.setText(R.string.pull_to_refresh_header_hint_ready);
     }
 
     @Override
     protected void onRefreshing() {
-//        mArrowImageView.clearAnimation();
-        mArrowImageView.setVisibility(View.GONE);
+        mArrowImageView.clearAnimation();
+        mArrowImageView.setVisibility(View.INVISIBLE);
         mProgressBar.setVisibility(View.VISIBLE);
+        ((Animatable)mProgressBar.getDrawable()).start();
         mHintTextView.setText(R.string.pull_to_refresh_header_hint_refreshing);
     }
 }

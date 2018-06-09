@@ -1,7 +1,9 @@
 # PullToRefresh
 下拉刷新的库。封装很好。
 
+## 效果图
 
+   ![](screenshot/screenshot_1528566767.png)	   ![](screenshot/screenshot_1528566767.png)
 
 ### Contact Me
 
