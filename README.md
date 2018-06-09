@@ -3,7 +3,7 @@
 
 ## 效果图
 
-   ![](screenshot/screenshot_1528566767.png)	   ![](screenshot/screenshot_1528566767.png)
+   ![](screenshot/screenshot_1528566778.png)	   ![](screenshot/screenshot_1528566767.png)
 
 ### Contact Me
 
