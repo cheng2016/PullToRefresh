@@ -19,7 +19,6 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
         isLoadMore = false;
         marktime = "";
         RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
-
     }
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
