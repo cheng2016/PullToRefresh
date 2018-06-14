@@ -1,14 +1,14 @@
 package com.cheng.app;
 
-import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,14 +17,14 @@ import com.cheng.app.refresh.PullToRefreshBase;
 import com.cheng.app.refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 /**
- * 下拉刷新，上拉加载更多activity
+ * 下拉加载更多activity
  */
-public class MainActivity extends AppCompatActivity {
-
+public class PullLoadMoreActivity extends AppCompatActivity {
     private PullToRefreshListView pullToRefreshListView;
     private ListView mListView;
 
@@ -37,15 +37,19 @@ public class MainActivity extends AppCompatActivity {
     private List<News> mDataList = new ArrayList<>();
     private MyAdapter adapter;
 
-    private Handler handler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pull_refresh);
+        //设置标题栏
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setTitle("PullLoadMore");
+        //添加导航栏返回按钮
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.refresh_listView);
         pullToRefreshListView.setPullLoadEnabled(false);
-        pullToRefreshListView.setScrollLoadEnabled(true);
+        pullToRefreshListView.setScrollLoadEnabled(false);
         pullToRefreshListView.setPullRefreshEnabled(true);
         mListView = pullToRefreshListView.getRefreshableView();
 
@@ -55,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                isLoadMore = false;
-                marktime = "";
+                isLoadMore = true;
+                marktime = "123";
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
                     }
-                }, 1200);
+                }, 1000);
             }
 
             @Override
@@ -73,20 +77,10 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         RequestMoreData("onPullUpToRefresh userid", marktime, REQUEST_NUM);
                     }
-                }, 1200);
+                }, 1000);
 
             }
         });
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PullLoadMoreActivity.class);
-                startActivity(intent);
-            }
-        });
-
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -95,23 +89,38 @@ public class MainActivity extends AppCompatActivity {
         }, 500);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    Handler handler = new Handler() {
+    };
+
     //下拉刷新数据
-    void RequestRefresh(String params, String marktime, int length) {
+    private void RequestRefresh(String params, String marktime, int length) {
         NewsResponse response = requestData(params, marktime);
         onResponse(response);
     }
 
     //上拉加载更多数据
-    void RequestMoreData(String params, String marktime, int length) {
+    private void RequestMoreData(String params, String marktime, int length) {
         NewsResponse response = requestData(params, marktime);
         onResponse(response);
     }
 
-    NewsResponse requestData(String params, String marktime) {
+    private NewsResponse requestData(String params, String marktime) {
         NewsResponse response = new NewsResponse();
         ArrayList<News> list = new ArrayList<>();
         if (TextUtils.isEmpty(marktime)) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 20; i > 10; i--) {
                 News news = new News();
                 news.icon = params;
                 news.title = "title：" + i;
@@ -119,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 list.add(news);
             }
         } else {
-            for (int i = 10; i < 19; i++) {
+            for (int i = 10; i > 0; i--) {
                 News news = new News();
                 news.icon = params;
                 news.title = "title：" + i;
@@ -127,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 list.add(news);
             }
         }
+        Collections.reverse(list);
         response.marktime = "" + new Random().nextLong();
         response.newsList = list;
         return response;
@@ -141,25 +151,27 @@ public class MainActivity extends AppCompatActivity {
                 mDataList.clear();
             }
             ArrayList<News> list = mResponse.newsList;
-            if (list != null) {
-                for (int i = 0; i < list.size(); i++) {
-                    mDataList.add(list.get(i));
+            if (mDataList != null && mDataList.size() > 0) {
+                for (int i = 0; i < mDataList.size(); i++) {
+                    list.add(mDataList.get(i));
                 }
             }
-            if (mDataList.size() == REQUEST_NUM) {
+            if (list.size() == REQUEST_NUM) {
                 hasMoreData = true;
             } else {
                 hasMoreData = false;
             }
+            mDataList = list;
             adapter.updataList(mDataList);
             pullToRefreshListView.onPullDownRefreshComplete();
             pullToRefreshListView.onPullUpRefreshComplete();
             pullToRefreshListView.setHasMoreData(hasMoreData);
+            pullToRefreshListView.setPullRefreshEnabled(hasMoreData);
         }
     }
 
 
-    class MyAdapter extends BaseAdapter {
+    private class MyAdapter extends BaseAdapter {
         List<News> newsList = new ArrayList<>();
 
         void updataList(List<News> list) {
@@ -187,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             ViewHolder holder = null;
             if (view == null) {
                 holder = new ViewHolder();
-                view = LayoutInflater.from(MainActivity.this).inflate(
+                view = LayoutInflater.from(PullLoadMoreActivity.this).inflate(
                         R.layout.item_news, parent, false);
                 holder.titleTv = view.findViewById(R.id.title_tv);
                 holder.contentTv = view.findViewById(R.id.content_tv);
@@ -204,20 +216,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class ViewHolder {
+    private class ViewHolder {
         TextView titleTv, contentTv;
     }
 
-    class News {
+    private class News {
         public String title;
         public String content;
         public String icon;
 
     }
 
-    class NewsResponse {
+    private class NewsResponse {
         public String marktime;
         public ArrayList<News> newsList;
     }
-
 }
