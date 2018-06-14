@@ -49,8 +49,8 @@ public class PullLoadMoreActivity extends AppCompatActivity {
 
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.refresh_listView);
         pullToRefreshListView.setPullLoadEnabled(false);
-        pullToRefreshListView.setScrollLoadEnabled(false);
-        pullToRefreshListView.setPullRefreshEnabled(true);
+        pullToRefreshListView.setScrollLoadEnabled(false);//设置是否能上拉
+        pullToRefreshListView.setPullRefreshEnabled(true);//设置是否能下拉
         mListView = pullToRefreshListView.getRefreshableView();
 
         adapter = new MyAdapter();
@@ -136,7 +136,7 @@ public class PullLoadMoreActivity extends AppCompatActivity {
                 list.add(news);
             }
         }
-        Collections.reverse(list);
+        Collections.reverse(list);//倒序排列
         response.marktime = "" + new Random().nextLong();
         response.newsList = list;
         return response;
@@ -165,8 +165,8 @@ public class PullLoadMoreActivity extends AppCompatActivity {
             adapter.updataList(mDataList);
             pullToRefreshListView.onPullDownRefreshComplete();
             pullToRefreshListView.onPullUpRefreshComplete();
-            pullToRefreshListView.setHasMoreData(hasMoreData);
-            pullToRefreshListView.setPullRefreshEnabled(hasMoreData);
+            pullToRefreshListView.setHasMoreData(hasMoreData);//设置是否还能上拉加载更多
+            pullToRefreshListView.setPullRefreshEnabled(hasMoreData);//设置是否还能下拉刷新
         }
     }
 
