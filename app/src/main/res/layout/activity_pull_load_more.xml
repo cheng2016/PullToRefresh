@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".PullLoadMoreActivity">
 
-    <com.cheng.app.refresh.PullToRefreshListView
+    <com.cheng.refresh.library.PullToRefreshListView
         android:id="@+id/refresh_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

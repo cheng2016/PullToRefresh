@@ -1,4 +1,4 @@
-package com.cheng.app.refresh;
+package com.cheng.refresh.library;
 
 
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.Adapter;
 import android.widget.ListView;
 
-import com.cheng.app.refresh.ILoadingLayout.State;
+import com.cheng.refresh.library.ILoadingLayout.State;
 
 /**
  * 这个类实现了ListView下拉刷新，上加载更多和滑到底部自动加载

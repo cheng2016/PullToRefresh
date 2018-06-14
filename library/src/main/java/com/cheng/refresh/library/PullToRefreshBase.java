@@ -1,4 +1,4 @@
-package com.cheng.app.refresh;
+package com.cheng.refresh.library;
 
 
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.cheng.app.refresh.ILoadingLayout.State;
+import com.cheng.refresh.library.ILoadingLayout.State;
 
 /**
  * 这个实现了下拉刷新和上拉加载更多的功能

@@ -13,8 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.cheng.app.refresh.PullToRefreshBase;
-import com.cheng.app.refresh.PullToRefreshListView;
+import com.cheng.refresh.library.PullToRefreshBase;
+import com.cheng.refresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class PullLoadMoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pull_refresh);
+        setContentView(R.layout.activity_pull_load_more);
         //设置标题栏
         ActionBar actionBar = this.getSupportActionBar();
         actionBar.setTitle("PullLoadMore");

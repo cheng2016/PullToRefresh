@@ -1,9 +1,8 @@
-package com.cheng.app.refresh;
+package com.cheng.refresh.library;
 
 
 import android.content.Context;
 import android.graphics.drawable.Animatable;
-import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,11 +10,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.cheng.app.R;
 
 /**
  * 这个类封装了下拉刷新的布局

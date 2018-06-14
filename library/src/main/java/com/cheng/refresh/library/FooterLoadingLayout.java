@@ -1,4 +1,4 @@
-package com.cheng.app.refresh;
+package com.cheng.refresh.library;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.cheng.app.R;
+
 
 /**
  * 这个类封装了下拉刷新的布局
