@@ -160,8 +160,12 @@ public class PullLoadMoreActivity extends AppCompatActivity {
             } else {
                 hasMoreData = false;
             }
-            mDataList = list;
-            adapter.updataList(mDataList);
+
+            adapter.updataList(list);
+            if(isLoadMore){//滑动到之前的位置高度
+                mListView.setSelection(mDataList.size() - 1);
+            }
+            mDataList = list;//同步全局变量
             pullToRefreshListView.onPullDownRefreshComplete();
             pullToRefreshListView.onPullUpRefreshComplete();
             pullToRefreshListView.setHasMoreData(hasMoreData);//设置是否还能上拉加载更多
