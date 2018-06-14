@@ -37,6 +37,8 @@ public class PullLoadMoreActivity extends AppCompatActivity {
     private List<News> mDataList = new ArrayList<>();
     private MyAdapter adapter;
 
+    private Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,9 +102,6 @@ public class PullLoadMoreActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    Handler handler = new Handler() {
-    };
 
     //下拉刷新数据
     private void RequestRefresh(String params, String marktime, int length) {
