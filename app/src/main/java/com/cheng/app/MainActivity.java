@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     mDataList.add(list.get(i));
                 }
             }
-            if (mDataList.size() == REQUEST_NUM) {
+            if (list.size() == REQUEST_NUM) {
                 hasMoreData = true;
             } else {
                 hasMoreData = false;
