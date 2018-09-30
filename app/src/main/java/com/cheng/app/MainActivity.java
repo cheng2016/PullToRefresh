@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                refreshView.setLastUpdatedLabel("2018-09-18 15:20");
                 isLoadMore = false;
                 marktime = "";
                 handler.postDelayed(new Runnable() {

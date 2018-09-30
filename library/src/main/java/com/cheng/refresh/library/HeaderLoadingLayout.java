@@ -91,6 +91,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
     public void setLastUpdatedLabel(CharSequence label) {
         // 如果最后更新的时间的文本是空的话，隐藏前面的标题
         mHeaderTimeViewTitle.setVisibility(TextUtils.isEmpty(label) ? View.INVISIBLE : View.VISIBLE);
+        mHeaderTimeView.setVisibility(TextUtils.isEmpty(label) ? View.INVISIBLE : View.VISIBLE);
         mHeaderTimeView.setText(label);
     }
 

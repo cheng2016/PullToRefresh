@@ -23,6 +23,7 @@
                 android:id="@+id/pull_to_refresh_header_hint_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:text="@string/pull_to_refresh_header_hint_normal"
                 android:textColor="#999999"
@@ -37,7 +38,7 @@
                 android:text="@string/pull_to_refresh_header_last_time"
                 android:textColor="#999999"
                 android:textSize="@dimen/picture_pull_to_refresh_last_update_time_text_size"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/pull_to_refresh_header_time"
@@ -50,7 +51,7 @@
                 android:minWidth="50dp"
                 android:textColor="#999999"
                 android:textSize="@dimen/picture_pull_to_refresh_last_update_time_text_size"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </RelativeLayout>
 
         <ImageView
