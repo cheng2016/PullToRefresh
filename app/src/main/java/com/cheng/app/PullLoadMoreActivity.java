@@ -61,7 +61,7 @@ public class PullLoadMoreActivity extends AppCompatActivity {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                isLoadMore = true;
+                isLoadMore = false;
                 marktime = "123";
                 handler.postDelayed(new Runnable() {
                     @Override
