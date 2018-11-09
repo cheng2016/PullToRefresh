@@ -3,6 +3,15 @@
 
 
 
+## Features
+
+- 上拉刷新、下拉加载更多的listview
+- 上拉刷新、下拉加载更多的gridview
+- 下拉刷新的scrollview
+- 有弹性的ScrollView
+
+
+
 ## Code Review
 
 ```
@@ -36,7 +45,7 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
 
    ![](screenshot/screenshot_1528566778.png)	   ![](screenshot/screenshot_1528566767.png)
 
-   
+
    ![](screenshot/screenshot_2018-11-091.png)       ![](screenshot/screenshot_2018-11-09.png)
 
 
