@@ -6,11 +6,16 @@
 ## Features
 
 - 上拉刷新、下拉加载更多的 Listview
+
 - 上拉刷新、下拉加载更多的 Gridview
+
 - 下拉刷新的 Scrollview
+
 - 有弹性的 Scrollview
 
+- 拥有 HeaderView 、 FooterView 的 GridView
 
+  
 
 ## Code Review
 
