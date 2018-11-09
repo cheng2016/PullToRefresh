@@ -46,7 +46,7 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
 
 
 
-## 效果图
+## Demo
 
    ![](screenshot/screenshot_1528566778.png)	   ![](screenshot/screenshot_1528566767.png)
 
