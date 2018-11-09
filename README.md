@@ -5,9 +5,9 @@
 
 ## Features
 
-- 上拉刷新、下拉加载更多的 Listview
+- 下拉刷新、上拉加载更多的 Listview
 
-- 上拉刷新、下拉加载更多的 Gridview
+- 下拉刷新、上拉加载更多的 Gridview
 
 - 下拉刷新的 Scrollview
 
