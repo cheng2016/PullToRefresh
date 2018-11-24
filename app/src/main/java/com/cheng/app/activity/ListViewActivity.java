@@ -1,4 +1,4 @@
-package com.cheng.app;
+package com.cheng.app.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -13,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cheng.app.News;
+import com.cheng.app.NewsResponse;
+import com.cheng.app.R;
 import com.cheng.refresh.library.PullToRefreshBase;
 import com.cheng.refresh.library.PullToRefreshListView;
 
@@ -23,11 +26,10 @@ import java.util.Random;
 /**
  * 下拉刷新，上拉加载更多activity
  */
-public class MainActivity extends AppCompatActivity {
+public class ListViewActivity extends AppCompatActivity implements PullToRefreshBase.OnRefreshListener<ListView> {
 
     private PullToRefreshListView pullToRefreshListView;
     private ListView mListView;
-
 
     private int REQUEST_NUM = 10;
     private String marktime = "";
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_listview);
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.refresh_listView);
         pullToRefreshListView.setPullLoadEnabled(false);
         pullToRefreshListView.setScrollLoadEnabled(true);
@@ -52,38 +54,13 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MyAdapter();
         mListView.setAdapter(adapter);
 
-        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                refreshView.setLastUpdatedLabel("2018-09-18 15:20");
-                isLoadMore = false;
-                marktime = "";
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
-                    }
-                }, 1200);
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                isLoadMore = true;
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        RequestMoreData("onPullUpToRefresh userid", marktime, REQUEST_NUM);
-                    }
-                }, 1200);
-
-            }
-        });
+        pullToRefreshListView.setOnRefreshListener(this);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PullLoadMoreActivity.class);
+                intent.setClass(ListViewActivity.this, PullDownRefreshActivity.class);
                 startActivity(intent);
             }
         });
@@ -94,6 +71,32 @@ public class MainActivity extends AppCompatActivity {
                 RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
             }
         }, 500);
+    }
+
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                refreshView.setLastUpdatedLabel("2018-09-18 15:20");
+        isLoadMore = false;
+        marktime = "";
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
+            }
+        }, 1200);
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        isLoadMore = true;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RequestMoreData("onPullUpToRefresh userid", marktime, REQUEST_NUM);
+            }
+        }, 1200);
+
     }
 
     //下拉刷新数据
@@ -159,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     class MyAdapter extends BaseAdapter {
         List<News> newsList = new ArrayList<>();
 
@@ -188,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             ViewHolder holder = null;
             if (view == null) {
                 holder = new ViewHolder();
-                view = LayoutInflater.from(MainActivity.this).inflate(
+                view = LayoutInflater.from(ListViewActivity.this).inflate(
                         R.layout.item_news, parent, false);
                 holder.titleTv = view.findViewById(R.id.title_tv);
                 holder.contentTv = view.findViewById(R.id.content_tv);
@@ -208,17 +210,4 @@ public class MainActivity extends AppCompatActivity {
     public class ViewHolder {
         TextView titleTv, contentTv;
     }
-
-    class News {
-        public String title;
-        public String content;
-        public String icon;
-
-    }
-
-    class NewsResponse {
-        public String marktime;
-        public ArrayList<News> newsList;
-    }
-
 }
