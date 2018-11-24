@@ -48,7 +48,6 @@ public class PullToRefreshGridView extends PullToRefreshBase<GridView> implement
      */
     public PullToRefreshGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
         setPullLoadEnabled(false);
     }
 

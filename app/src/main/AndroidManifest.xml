@@ -21,6 +21,8 @@
         <activity android:name=".activity.GridViewActivity" />
 
         <activity android:name=".activity.PullDownRefreshActivity" />
+
+        <activity android:name=".activity.ScrollViewActivity" />
     </application>
 
 </manifest>

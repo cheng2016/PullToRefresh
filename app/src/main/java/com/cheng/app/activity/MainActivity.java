@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.list_view_refresh).setOnClickListener(this);
         findViewById(R.id.list_view_pull_down_refresh).setOnClickListener(this);
         findViewById(R.id.grid_view_refresh).setOnClickListener(this);
+        findViewById(R.id.scroll_view_refresh).setOnClickListener(this);
     }
 
     @Override
@@ -39,7 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setClass(MainActivity.this, GridViewActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.scroll_view_refresh:
+                intent.setClass(MainActivity.this, ScrollViewActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

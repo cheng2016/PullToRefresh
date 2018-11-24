@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.GridViewActivity">
+    tools:context=".activity.ScrollViewActivity">
 
-    <com.cheng.refresh.library.PullToRefreshGridView
-        android:id="@+id/refresh_listView"
+    <com.cheng.refresh.library.PullToRefreshScrollView
+        android:id="@+id/refresh_scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+    </com.cheng.refresh.library.PullToRefreshScrollView>
 
 </RelativeLayout>

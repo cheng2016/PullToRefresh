@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_90"
+        android:background="#cccccc"
+        android:layout_marginTop="@dimen/widget_size_40"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/widget_size_20"
+            android:gravity="center"
+            android:text="ScrollViewActivity" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_90"
+        android:background="#999999"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/widget_size_20"
+            android:gravity="center"
+            android:text="ScrollViewActivity" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_90"
+        android:background="#dbdbdb"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/widget_size_20"
+            android:gravity="center"
+            android:text="ScrollViewActivity" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_90"
+        android:background="#cdcdcd"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/widget_size_20"
+            android:gravity="center"
+            android:text="ScrollViewActivity" />
+    </RelativeLayout>
+</LinearLayout>
