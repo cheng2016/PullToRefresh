@@ -13,7 +13,7 @@ import android.widget.GridView;
  * @date 2018/11/1 10:10
  */
 public class PullToRefreshGridView extends PullToRefreshBase<GridView> implements AbsListView.OnScrollListener {
-    /**ListView*/
+    /**GridView*/
     private HeaderAndFooterGridView mGridView;
     /**用于滑到底部自动加载的Footer*/
     private LoadingLayout mLoadMoreFooterLayout;
@@ -54,12 +54,11 @@ public class PullToRefreshGridView extends PullToRefreshBase<GridView> implement
 
     @Override
     protected HeaderAndFooterGridView createRefreshableView(Context context, AttributeSet attrs) {
-        HeaderAndFooterGridView listView = new HeaderAndFooterGridView(context,attrs);
-        listView.setId(android.R.id.list);  //添加默认的ID，防止This usually happens when two views of different type have the same id in the same hierarchy
-        mGridView = listView;
-        listView.setOnScrollListener(this);
-
-        return listView;
+        HeaderAndFooterGridView gridView = new HeaderAndFooterGridView(context,attrs);
+        gridView.setId(android.R.id.list);  //添加默认的ID，防止This usually happens when two views of different type have the same id in the same hierarchy
+        mGridView = gridView;
+        gridView.setOnScrollListener(this);
+        return gridView;
     }
     /**
      * 设置是否有更多数据的标志
