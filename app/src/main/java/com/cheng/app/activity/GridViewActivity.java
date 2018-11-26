@@ -12,9 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.cheng.app.News;
 import com.cheng.app.NewsResponse;
 import com.cheng.app.R;
-import com.cheng.app.News;
 import com.cheng.refresh.library.PullToRefreshBase;
 import com.cheng.refresh.library.PullToRefreshGridView;
 

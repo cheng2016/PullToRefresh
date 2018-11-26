@@ -48,7 +48,7 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
 
     @Override
     protected ScrollView createRefreshableView(Context context, AttributeSet attrs) {
-        MyScrollView scrollView = new MyScrollView(context, attrs);
+        ScrollView scrollView = new ScrollView(context, attrs);
         scrollView.setId(android.R.id.list);
         return scrollView;
     }

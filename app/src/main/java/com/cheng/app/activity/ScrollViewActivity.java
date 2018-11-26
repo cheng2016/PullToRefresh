@@ -6,15 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.cheng.app.R;
 import com.cheng.refresh.library.PullToRefreshBase;
-import com.cheng.refresh.library.PullToRefreshGridView;
 import com.cheng.refresh.library.PullToRefreshScrollView;
 
 /**
@@ -35,9 +31,6 @@ public class ScrollViewActivity extends AppCompatActivity implements PullToRefre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrollview);
         pullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.refresh_scrollView);
-//        pullToRefreshScrollView.setPullLoadEnabled(true);
-//        pullToRefreshScrollView.setScrollLoadEnabled(true);
-//        pullToRefreshScrollView.setPullRefreshEnabled(true);
         pullToRefreshScrollView.setOnRefreshListener(this);
         mScrollView = pullToRefreshScrollView.getRefreshableView();
         childView = LayoutInflater.from(this).inflate(R.layout.scroll_child_view,null);

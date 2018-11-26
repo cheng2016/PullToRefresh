@@ -1,10 +1,10 @@
 package com.cheng.app.activity;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ezy.ui.layout.LoadingLayout;
+
 /**
  * 下拉刷新，上拉加载更多activity
  */
 public class ListViewActivity extends AppCompatActivity implements PullToRefreshBase.OnRefreshListener<ListView> {
-
+    public static final String TAG = "ListViewActivity";
     private PullToRefreshListView pullToRefreshListView;
     private ListView mListView;
 
@@ -41,10 +43,15 @@ public class ListViewActivity extends AppCompatActivity implements PullToRefresh
 
     private Handler handler = new Handler();
 
+    LoadingLayout mLoadingLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+
+        mLoadingLayout = LoadingLayout.wrap(this);
+
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.refresh_listView);
         pullToRefreshListView.setPullLoadEnabled(false);
         pullToRefreshListView.setScrollLoadEnabled(true);
@@ -59,18 +66,23 @@ public class ListViewActivity extends AppCompatActivity implements PullToRefresh
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
-                intent.setClass(ListViewActivity.this, PullDownRefreshActivity.class);
-                startActivity(intent);
+                Log.i(TAG,"onclick");
             }
         });
 
+        mLoadingLayout.showLoading();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                mLoadingLayout.showError();
+            }
+        }, 2000);
+        mLoadingLayout.setRetryListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 RequestRefresh("onPullDownToRefresh userid", marktime, REQUEST_NUM);
             }
-        }, 500);
+        });
     }
 
 
@@ -159,6 +171,7 @@ public class ListViewActivity extends AppCompatActivity implements PullToRefresh
             pullToRefreshListView.onPullDownRefreshComplete();
             pullToRefreshListView.onPullUpRefreshComplete();
             pullToRefreshListView.setHasMoreData(hasMoreData);
+            mLoadingLayout.showContent();
         }
     }
 
