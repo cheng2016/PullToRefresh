@@ -28,7 +28,7 @@ import ezy.ui.layout.LoadingLayout;
 /**
  * 下拉刷新，上拉加载更多activity
  */
-public class ListViewActivity extends AppCompatActivity implements PullToRefreshBase.OnRefreshListener<ListView> {
+public class ListViewActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener<ListView>, AdapterView.OnItemClickListener {
     public static final String TAG = "ListViewActivity";
     private PullToRefreshListView pullToRefreshListView;
     private ListView mListView;
@@ -43,33 +43,26 @@ public class ListViewActivity extends AppCompatActivity implements PullToRefresh
 
     private Handler handler = new Handler();
 
-    LoadingLayout mLoadingLayout;
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_listview;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listview);
-
-        mLoadingLayout = LoadingLayout.wrap(this);
-
+    protected void initView(Bundle savedInstanceState) {
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.refresh_listView);
         pullToRefreshListView.setPullLoadEnabled(false);
         pullToRefreshListView.setScrollLoadEnabled(true);
         pullToRefreshListView.setPullRefreshEnabled(true);
         mListView = pullToRefreshListView.getRefreshableView();
-
         adapter = new MyAdapter();
         mListView.setAdapter(adapter);
-
         pullToRefreshListView.setOnRefreshListener(this);
+        mListView.setOnItemClickListener(this);
+    }
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i(TAG,"onclick");
-            }
-        });
-
+    @Override
+    protected void initData() {
         mLoadingLayout.showLoading();
         handler.postDelayed(new Runnable() {
             @Override
@@ -85,6 +78,10 @@ public class ListViewActivity extends AppCompatActivity implements PullToRefresh
         });
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i(TAG,"onclick");
+    }
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
