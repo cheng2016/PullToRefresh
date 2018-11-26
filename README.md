@@ -62,6 +62,8 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
 
 [A GridView which can addHeaderView and addFooterView](https://github.com/liaohuqiu/android-GridViewWithHeaderAndFooter) 
 
+[loadinglayout](https://github.com/czy1121/loadinglayout)
+
 
 
 ### Contact Me
