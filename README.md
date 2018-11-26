@@ -15,6 +15,8 @@
 
 - 拥有 HeaderView 、 FooterView 的 GridView
 
+- 通用Loading页面
+
   
 
 ## Code Review
@@ -54,7 +56,7 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
    ![](screenshot/screenshot_2018-11-091.png)       ![](screenshot/screenshot_2018-11-09.png)
 
 
-
+   ![](screenshot/screenshot_1543218535.png)       ![](screenshot/screenshot_1543218575.png)
 
 ## Thanks
 
