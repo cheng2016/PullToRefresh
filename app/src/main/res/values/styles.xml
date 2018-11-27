@@ -7,10 +7,4 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-<!--    <item name="styleLoadingLayout">@style/LoadingLayoutStyle</item>
-
-    <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
-        <item name="llEmptyImage">@mipmap/empty</item>
-        <item name="llErrorImage">@mipmap/error</item>
-    </style>-->
 </resources>

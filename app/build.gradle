@@ -40,7 +40,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(path: ':library')
-    compile project(path: ':loadinglibrary')
-//    implementation(name: 'loadinglayout_V1.0.2', ext: 'aar')
+//    compile project(path: ':loadinglibrary')
+    implementation(name: 'loadinglayout_V1.0.2', ext: 'aar')
 //    implementation 'com.github.czy1121:loadinglayout:1.0.1'
 }
