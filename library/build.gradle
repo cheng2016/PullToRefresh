@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.cheng2016'
 version='1.0.3'
-archivesBaseName='refreshlayout'
+archivesBaseName='PullToRefresh'
 
 android {
     compileSdkVersion 26
