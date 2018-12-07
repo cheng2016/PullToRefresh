@@ -66,6 +66,11 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
 
 
 
+## gradle  [![Stable Version](https://img.shields.io/badge/Stable%20Version-1.0.0-brightgreen.svg)]
+(https://github.com/cheng2016/PullToRefresh)  ↘
+implementation 'com.github.cheng2016:PullToRefresh:(↖)'
+<br/>
+
 ## Contact Me
 
 - Github: github.com/cheng2016
