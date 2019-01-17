@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Library</string>
+
+    <string name="pushmsg_center_no_more_msg">All data loaded</string>
+    <string name="pushmsg_center_pull_down_update_time">Last update time :</string>
+    <string name="pushmsg_center_load_more_ongoing_text">Loading more...</string>
+    <string name="pushmsg_center_load_more_text">More</string>
+
+    <!-- 下拉刷新和上拉加载更多的文本 -->
+    <string name="pull_to_refresh_header_hint_normal">Pull down can refresh</string>
+    <string name="pull_to_refresh_header_hint_normal2">Pull up can refresh</string>
+    <string name="pull_to_refresh_header_hint_ready">Release immediate refresh</string>
+    <string name="pull_to_refresh_header_hint_refreshing">Refreshing</string>
+    <string name="pull_to_refresh_header_last_time">@string/pushmsg_center_pull_down_update_time</string>
+</resources>
