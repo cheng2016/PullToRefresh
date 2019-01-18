@@ -41,10 +41,10 @@
         <item name="llButtonBackground">@drawable/_loading_layout_button</item>
 
         <item name="llEmptyImage">@mipmap/empty</item>
-        <item name="llEmptyText">暂无数据</item>
+        <item name="llEmptyText">@string/no_data</item>
         <item name="llErrorImage">@mipmap/error</item>
-        <item name="llErrorText">无网络连接，请检查您的网络...</item>
-        <item name="llRetryText">加载失败，点击重试~~</item>
+        <item name="llErrorText">@string/no_network_please_check</item>
+        <item name="llRetryText">@string/load_fail</item>
     </style>
 
 

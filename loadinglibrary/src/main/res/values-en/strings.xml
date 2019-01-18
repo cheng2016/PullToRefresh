@@ -1,0 +1,5 @@
+<resources>
+    <string name="no_data">No data</string>
+    <string name="no_network_please_check">No internet connection, please check your network...</string>
+    <string name="load_fail">Failed to load, click to try again~~</string>
+</resources>
