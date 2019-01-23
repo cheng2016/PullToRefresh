@@ -67,7 +67,7 @@ pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListen
 
 
 ## Download  [![Stable Version](https://jitpack.io/v/cheng2016/PullToRefresh.svg)](https://jitpack.io/#cheng2016/PullToRefresh)
-    implementation 'com.github.cheng2016:PullToRefresh:V2.0.0'
+    implementation 'com.github.cheng2016:PullToRefresh:2.0.1'
 <br/>
 
 
