@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        tools:text="无网络连接，请检查您的网络..."
+        tools:text="@string/no_network_please_check"
         tools:textColor="#666666"
         tools:textSize="16sp"/>
 
@@ -35,7 +35,7 @@
         android:gravity="center"
         android:minWidth="120dp"
         android:padding="10dp"
-        tools:text="加载失败，点击重试~~"
+        tools:text="@string/load_fail"
         tools:textColor="#999999"
         tools:textSize="16sp"/>
 
